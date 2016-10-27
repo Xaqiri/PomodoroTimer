@@ -1,4 +1,6 @@
 # PomodoroTimer
 Pomodoro Timer written in Python using Tkinter 
 
-Download and unzip, then double-click pomodoro.pyw 
+Executable version of this application is in the dist branch.  
+
+Does not work on Linux or Mac. 
