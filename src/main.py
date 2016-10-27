@@ -1,59 +1,66 @@
 import sys 
+import os 
+import pygame as p 
 import tkinter 
 import tkinter.messagebox 
 import tkinter.font 
 
 # Issues 
-# Pressing the "Start Timer" button multiple times while the timer is running will 
-# cause the timer to tick down much faster 
+# None, it's perfect 
 
 def main(): 
+    p.init() 
     # Event handlers 
     def quit(): 
         root.destroy() 
     def work_timer(): 
+        try: 
+            p.mixer.music.load(work_stop_audio) 
+        except: 
+            print("Can't load 'Nyeah Stop.mp3'")
+        stopped.set(True) 
         seconds.set(0) 
         minutes.set(work_minutes.get()) 
         time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
         time.set(time_var) 
     def break_timer(): 
+        try: 
+            p.mixer.music.load(break_stop_audio) 
+        except: 
+            print("Can't load 'Back to Work.mp3'") 
+        stopped.set(True) 
         seconds.set(0) 
         minutes.set(break_minutes.get()) 
         time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
         time.set(time_var) 
-    def resume(): 
-        stopped.set(False) 
-        root.after(100, decrement_timer) 
+    def start(): 
+        if stopped.get(): 
+            stopped.set(False) 
+            root.after(100, decrement_timer)  
     def stop(): 
         stopped.set(True) 
     def decrement_break_timer(): 
-        seconds.set(0) 
-        break_minutes.set(break_minutes.get()-1) 
-        minutes.set(break_minutes.get()) 
-        time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
-        time.set(time_var) 
+        if break_minutes.get() > 1: 
+            break_minutes.set(break_minutes.get()-1) 
+        break_timer() 
     def increment_break_timer(): 
-        seconds.set(0) 
-        break_minutes.set(break_minutes.get()+1) 
-        minutes.set(break_minutes.get()) 
-        time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
-        time.set(time_var) 
+        if break_minutes.get() < 60: 
+            break_minutes.set(break_minutes.get()+1) 
+        break_timer() 
     def decrement_work_timer(): 
-        seconds.set(0) 
-        work_minutes.set(work_minutes.get()-1) 
-        minutes.set(work_minutes.get()) 
-        time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
-        time.set(time_var) 
+        if work_minutes.get() > 1: 
+            work_minutes.set(work_minutes.get()-1) 
+        work_timer() 
     def increment_work_timer(): 
-        seconds.set(0) 
-        work_minutes.set(work_minutes.get()+1) 
-        minutes.set(work_minutes.get()) 
-        time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
-        time.set(time_var) 
+        if work_minutes.get() < 60: 
+            work_minutes.set(work_minutes.get()+1) 
+        work_timer() 
     def about(): 
-        tkinter.messagebox.showinfo("About this application", "Pomodoro Timer\nBy Xaqiri\nVersion 1.0.0\nOct 8, 2016\n\nWritten in Python\nVersion 3.5.1") 
+        tkinter.messagebox.showinfo("About this application", "Pomodoro Timer\nBy Xaqiri\nVersion 1.0.1\nOct 8, 2016 - Oct 26, 2016\n\nWritten in Python\nVersion 3.5.1") 
     def info(): 
-        tkinter.messagebox.showinfo("Pomodoro info", "Placeholder.  Will update with info about what a Pomodoro timer is in the future.\n\nFor now, check Wikipedia.") 
+        tkinter.messagebox.showinfo("Pomodoro info", "A productivity timer.\nWork for some number of minutes, break for a shorter amount.\n\nFor more in-depth info, check Wikipedia.") 
+    def issues(): 
+        tkinter.messagebox.showwarning("Known Issues", "None, this application is perfect.")
     def decrement_timer(): 
         if not stopped.get(): 
             seconds.set(seconds.get()-1) 
@@ -63,9 +70,18 @@ def main():
             time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
             time.set(time_var)
             if minutes.get() <= 0 and seconds.get() <= 0: 
-                tkinter.messagebox.showwarning("Ding!", "Time's up") 
+                try: 
+                    p.mixer.music.play() 
+                except: 
+                    print("Audio could not be played") 
             else: 
                 root.after(1000, decrement_timer) 
+    # Audio 
+    try: 
+        work_stop_audio = os.path.join('..', 'audio', 'Nyeah Stop.mp3') 
+        break_stop_audio = os.path.join('..', 'audio', 'Back to Work.mp3') 
+    except: 
+        print("Can't load audio") 
     # Root window 
     root = tkinter.Tk() 
     root.title("Pomodoro Timer") 
@@ -93,7 +109,7 @@ def main():
     time_var = "{}:{:02d}".format(minutes.get(), seconds.get())
     time.set(time_var)
     stopped = tkinter.BooleanVar() 
-    stopped.set(False) 
+    stopped.set(True) 
     # Frames 
     button_bar = tkinter.Frame(root, bg="black") 
     main_frame = tkinter.Frame(root, borderwidth=10, padx=5, pady=5, bg="black") 
@@ -107,6 +123,7 @@ def main():
     help_menu = tkinter.Menu(menu_bar, tearoff=0) 
     help_menu.add_command(label="Info", command=info)
     help_menu.add_command(label="About", command=about) 
+    help_menu.add_command(label="Issues", command=issues)
     menu_bar.add_cascade(label="File", menu=file_menu) 
     menu_bar.add_cascade(label="Help", menu=help_menu)
     root.config(menu=menu_bar) 
@@ -119,9 +136,9 @@ def main():
     break_min_label = tkinter.Label(break_timer_frame, textvariable=break_minutes, bg="black", fg="white", font=f1) 
     work_min_label = tkinter.Label(work_timer_frame, textvariable=work_minutes, bg="black", fg="white", font=f1) 
     # Buttons 
-    start_button = tkinter.Button(button_bar, text="Work Timer", command=work_timer) 
+    work_button = tkinter.Button(button_bar, text="Work Timer", command=work_timer) 
     rest_button = tkinter.Button(button_bar, text="Break Timer", command=break_timer) 
-    resume_button = tkinter.Button(button_bar, text="Start Timer", command=resume)
+    start_button = tkinter.Button(button_bar, text="Start Timer", command=start)
     stop_button = tkinter.Button(button_bar, text="Stop Timer", command=stop) 
     decrement_break_timer_button = tkinter.Button(break_timer_frame, text="-", command=decrement_break_timer) 
     increment_break_timer_button = tkinter.Button(break_timer_frame, text="+", command=increment_break_timer) 
@@ -130,9 +147,9 @@ def main():
 
     button_bar.pack(side=tkinter.TOP, fill=tkinter.X) 
     main_frame.pack(fill=tkinter.BOTH, expand=True) 
-    start_button.pack(side=tkinter.LEFT) 
+    work_button.pack(side=tkinter.LEFT) 
     rest_button.pack(side=tkinter.LEFT) 
-    resume_button.pack(side=tkinter.LEFT)
+    start_button.pack(side=tkinter.LEFT)
     stop_button.pack(side=tkinter.RIGHT) 
     t.pack() 
     timer_frame.pack(expand=True) 
