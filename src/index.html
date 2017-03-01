@@ -1,7 +1,54 @@
 <!DOCTYPE html>
 
-<head></head>
-<body>
-  
-</body>
-<footer></footer>
+<html>
+	<head>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Pomodoro Timer</title>
+		<link rel="stylesheet" type="text/css" href="index.css">
+	</head>
+
+	<body>
+		<div class="buttons">
+			<div id="select_timer">
+				<button>Work Timer</button>
+				<button>Start</button>
+			</div>
+			<div id="start_stop">
+				<button>Break Timer</button>
+				<button>Stop</button>
+			</div>
+		</div>
+		<div id="title">Pomodoro Timer</div>
+		<div id="timer">
+			<span id="minutes">25</span>:<span id="seconds">00</span>
+		</div>
+		<div id="set_time">
+			<div id="set_break">
+				<div>Break</div>
+				<div class="buttons">
+					<div><button>-</button></div>
+					<div>00</div>
+					<div><button>+</button></div>
+				</div>
+			</div>
+			<div id="set_work">
+				<div>Work</div>
+				<div class="buttons">
+					<button>-</button>
+					<div>00</div>
+					<button>+</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<footer>
+		<h5>
+      Created by <a href="http://xaqiri.github.io">Zachary Robbins</a>.
+    </h5>
+    <h5>View the code <a href="https://github.com/Xaqiri/PomodoroTimer">here</a>.</h5>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    </script>
+    <script src="index.js"></script>
+	</footer>
+</html>
