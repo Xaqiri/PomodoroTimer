@@ -30,7 +30,7 @@ $(document).ready(() => {
 			if (seconds - 1 >= 0) {
 				seconds--
 			} else {
-				seconds = 5
+				seconds = 59
 				minutes = minutes - 1 > 0 ? minutes - 1 : 0
 			}
 			seconds = seconds < 10 ? '0'+seconds : seconds
@@ -39,6 +39,8 @@ $(document).ready(() => {
 			if ($('#minutes').text() == 0 && $('#seconds').text() == 0) {
 				$('#stopButton').click()
 				document.getElementById(audio).play()
+				let audioAlert = audio === 'takeABreakAudio' ? 'Take a break!' : 'Get back to work!'
+				alert(audioAlert)
 			}
 		}, 1000)
 	})
