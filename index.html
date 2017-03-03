@@ -8,15 +8,21 @@
 	</head>
 
 	<body>
-		<div class="buttons">
-			<div id="select_timer">
-				<button>Work Timer</button>
-				<button>Start</button>
-			</div>
-			<div id="start_stop">
-				<button>Break Timer</button>
-				<button>Stop</button>
-			</div>
+		<div style="display: none">
+			<audio controls id="takeABreakAudio">
+				<source src="./audio/Nyeah Stop.mp3" type="audio/mp3">
+			</audio>
+			<audio controls id="backToWorkAudio">
+				<source src="./audio/Back to Work.mp3" type="audio/mp3">
+			</audio>
+		</div>
+		<div id="select_timer">
+			<div class="button" id="workTimerButton">Work Timer</div>
+			<div class="button" id="startButton">Start</div>
+		</div>
+		<div id="start_stop">
+			<div class="button" id="breakTimerButton">Break Timer</div>
+			<div class="button" id="stopButton">Stop</div>
 		</div>
 		<div id="title">Pomodoro Timer</div>
 		<div id="timer">
@@ -24,20 +30,16 @@
 		</div>
 		<div id="set_time">
 			<div id="set_break">
-				<div>Break</div>
-				<div class="buttons">
-					<div><button>-</button></div>
-					<div>00</div>
-					<div><button>+</button></div>
-				</div>
+				<div class="button">Break</div>
+				<div class="button" id="breakMinus">-</div>
+				<div id="breakTime">5</div>
+				<div class="button" id="breakPlus">+</div>
 			</div>
 			<div id="set_work">
-				<div>Work</div>
-				<div class="buttons">
-					<button>-</button>
-					<div>00</div>
-					<button>+</button>
-				</div>
+				<div class="button">Work</div>
+				<div class="button" id="workMinus">-</div>
+				<div id="workTime">25</div>
+				<div class="button" id="workPlus">+</div>
 			</div>
 		</div>
 	</body>
@@ -45,10 +47,10 @@
 	<footer>
 		<h5>
       Created by <a href="http://xaqiri.github.io">Zachary Robbins</a>.
-    </h5>
-    <h5>View the code <a href="https://github.com/Xaqiri/PomodoroTimer/tree/gh-pages">here</a>.</h5>
+    	<br>View the code <a 	href="https://github.com/Xaqiri/PomodoroTimer/tree/gh-pages">here</a>.
+		</h5>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js">
     </script>
-    <script src="index.js"></script>
+    <script src="src/index.js"></script>
 	</footer>
 </html>

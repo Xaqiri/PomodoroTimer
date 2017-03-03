@@ -1,0 +1,71 @@
+$bgcolor: #004;
+$fgcolor: #DDD;
+
+html, body {
+	background: $bgcolor;
+	color: $fgcolor;
+	text-align: center;
+}
+
+.button {
+	height: 100%;
+	padding: 4px 4px;
+	margin: 5%;
+  border: 2px solid lighten($bgcolor, 40%);
+	color: $fgcolor;
+  background-color: $bgcolor;
+  &:hover {
+    background-color: lighten($bgcolor, 60%);
+    color: darken($fgcolor, 80%);
+    box-shadow: 0px 0px 10px lighten($bgcolor, 60%);
+		cursor: pointer;
+  }
+}
+
+#select_timer {
+	display: inline-block;
+	width: 30%;
+	float: left;
+}
+
+#start_stop {
+	display: inline-block;
+	width: 30%;
+	float: right;
+}
+
+#title {
+	display: inline-block;
+	width: 100%;
+	margin-top: 5%;
+	font-size: 2em;
+}
+
+#timer {
+	display: inline-block;
+	width: 100%;
+	font-size: 8em;
+	margin-bottom: 1%;
+}
+
+#set_time {
+	display: inline-block;
+	width: 100%;
+	font-size: 1.5em;
+}
+
+#set_break {
+	float: left;
+	width: 40%;
+	display: inline-block;
+}
+
+#set_work {
+	float: right;
+	width: 40%;
+	display: inline-block;
+}
+
+footer {
+	margin-top: 5%;
+}
