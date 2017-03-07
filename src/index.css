@@ -6,7 +6,7 @@ html, body {
 .button {
   height: 100%;
   padding: 4px 4px;
-  margin: 5%;
+  margin-bottom: 5%;
   border: 2px solid #1111ff;
   color: #DDD;
   background-color: #004; }
@@ -17,26 +17,34 @@ html, body {
     cursor: pointer; }
 
 #select_timer {
-  display: inline-block;
-  width: 30%;
-  float: left; }
+  width: 100%;
+  font-size: 2em; }
 
 #start_stop {
   display: inline-block;
-  width: 30%;
-  float: right; }
+  width: 100%;
+  font-size: 1.5em; }
+
+#startButton {
+  float: left;
+  width: 40%;
+  display: inline-block; }
+
+#stopButton {
+  float: right;
+  width: 40%;
+  display: inline-block; }
 
 #title {
   display: inline-block;
   width: 100%;
-  margin-top: 5%;
   font-size: 2em; }
 
 #timer {
   display: inline-block;
   width: 100%;
   font-size: 8em;
-  margin-bottom: 1%; }
+  margin-bottom: 5%; }
 
 #set_time {
   display: inline-block;
@@ -52,6 +60,9 @@ html, body {
   float: right;
   width: 40%;
   display: inline-block; }
+
+#breakTime, #workTime {
+  margin-bottom: 5%; }
 
 footer {
   margin-top: 5%; }

@@ -1,57 +1,69 @@
-const defaultBreak = 5
-const defaultWork = 25
-const changeAudio = (task, audio) => {
-	audio = task === 'work' ? 'takeABreakAudio' : 'backToWorkAudio'
-	return audio
-}
-
 $(document).ready(() => {
+	const defaultBreak = 5
+	const defaultWork = 25
+	const changeAudio = (task, audio) => {
+		audio = task === 'work' ? 'takeABreakAudio' : 'backToWorkAudio'
+		return audio
+	}
+	const stop = () => {
+		clearInterval(timer)
+		$('#startStopButton').text('Start')
+		timer = null
+	}
+
 	let audio
 	// Using the Work Timer and Break Timer buttons to change the displayed time
 	$('#workTimerButton').click(() => {
 		audio = changeAudio('work', audio)
-		$('#stopButton').click()
+		//$('#stopButton').click()
+		stop()
 		$('#minutes').text($('#workTime').text())
 		$('#seconds').text('00')
 	})
 	$('#breakTimerButton').click(() => {
 		audio = changeAudio('break', audio)
-		$('#stopButton').click()
+		//$('#stopButton').click()
+		stop()
 		$('#minutes').text($('#breakTime').text())
 		$('#seconds').text('00')
 	})
 
 	// Use the Start and Stop buttons for the timer
-	let timer
-	$('#startButton').click(() => {
-		timer = setInterval(() => {
-			let seconds = parseInt($('#seconds').text())
-			let minutes = parseInt($('#minutes').text())
-			if (seconds - 1 >= 0) {
-				seconds--
-			} else {
-				seconds = 59
-				minutes = minutes - 1 > 0 ? minutes - 1 : 0
-			}
-			seconds = seconds < 10 ? '0'+seconds : seconds
-			$('#seconds').text(seconds)
-			$('#minutes').text(minutes)
-			if ($('#minutes').text() == 0 && $('#seconds').text() == 0) {
-				$('#stopButton').click()
-				document.getElementById(audio).play()
-				let audioAlert = audio === 'takeABreakAudio' ? 'Take a break!' : 'Get back to work!'
-				alert(audioAlert)
-			}
-		}, 1000)
-	})
-	$('#stopButton').click(() => {
-		clearInterval(timer)
+	let timer = null
+	$('#startStopButton').click(() => {
+		if (timer === null) {
+			$('#startStopButton').text('Stop')
+			timer = setInterval(() => {
+				let seconds = parseInt($('#seconds').text())
+				let minutes = parseInt($('#minutes').text())
+				if (seconds - 1 >= 0) {
+					seconds--
+				} else {
+					seconds = 59
+					minutes = minutes - 1 > 0 ? minutes - 1 : 0
+				}
+				seconds = seconds < 10 ? '0'+seconds : seconds
+				$('#seconds').text(seconds)
+				$('#minutes').text(minutes)
+				if ($('#minutes').text() == 0 && $('#seconds').text() == 0) {
+					//$('#stopButton').click()
+					stop()
+					document.getElementById(audio).play()
+					let audioAlert = audio === 'takeABreakAudio' ? 'Take a break!' : 'Get back to work!'
+					//alert(audioAlert)
+				}
+			}, 1000)
+		} else {
+			clearInterval(timer)
+			$('#startStopButton').text('Start')
+			timer = null
+		}
 	})
 	// Setting the length of the timers
-	$('#set_break div').first().click(() => {
-		$('#breakTime').text(defaultBreak)
-		$('#breakTimerButton').click()
-	})
+	//$('#set_break div').first().click(() => {
+	//	//$('#breakTime').text(defaultBreak)
+	//	$('#breakTimerButton').click()
+	//})
 	$('#breakMinus').click(() => {
 		let breakTime = $('#breakTime').text()
 		breakTime = breakTime - 1 > 1 ? breakTime - 1 : 1
@@ -64,10 +76,10 @@ $(document).ready(() => {
 		$('#breakTime').text(breakTime)
 		$('#breakTimerButton').click()
 	})
-	$('#set_work div').first().click(() => {
-		$('#workTime').text(defaultWork)
-		$('#workTimerButton').click()
-	})
+	// $('#set_work div').first().click(() => {
+	// 	$('#workTime').text(defaultWork)
+	// 	$('#workTimerButton').click()
+	// })
 	$('#workMinus').click(() => {
 		let workTime = $('#workTime').text()
 		workTime = workTime - 1 > 1 ? workTime - 1 : 1

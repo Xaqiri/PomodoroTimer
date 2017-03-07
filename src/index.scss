@@ -10,7 +10,7 @@ html, body {
 .button {
 	height: 100%;
 	padding: 4px 4px;
-	margin: 5%;
+	margin-bottom: 5%;
   border: 2px solid lighten($bgcolor, 40%);
 	color: $fgcolor;
   background-color: $bgcolor;
@@ -23,21 +23,35 @@ html, body {
 }
 
 #select_timer {
-	display: inline-block;
-	width: 30%;
-	float: left;
+	width: 100%;
+	font-size: 2em;
+}
+
+#startStopButton {
+
 }
 
 #start_stop {
 	display: inline-block;
-	width: 30%;
+	width: 100%;
+	font-size: 1.5em;
+}
+
+#startButton {
+	float: left;
+	width: 40%;
+	display: inline-block;
+}
+
+#stopButton {
 	float: right;
+	width: 40%;
+	display: inline-block;
 }
 
 #title {
 	display: inline-block;
 	width: 100%;
-	margin-top: 5%;
 	font-size: 2em;
 }
 
@@ -45,7 +59,7 @@ html, body {
 	display: inline-block;
 	width: 100%;
 	font-size: 8em;
-	margin-bottom: 1%;
+	margin-bottom: 5%;
 }
 
 #set_time {
@@ -64,6 +78,10 @@ html, body {
 	float: right;
 	width: 40%;
 	display: inline-block;
+}
+
+#breakTime, #workTime {
+	margin-bottom: 5%;
 }
 
 footer {
