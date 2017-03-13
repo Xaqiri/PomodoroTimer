@@ -28,6 +28,11 @@ $(document).ready(() => {
 		$('#minutes').text($('#'+mode+'Time').text())
 		$('#seconds').text('00')
 	}
+	const reinitializeTimer = () => {
+		$('#workTime').text(defaultWork)
+		$('#breakTime').text(defaultBreak)
+		changeDisplayedTime('work')
+	}
 
 	// Using the Work Timer and Break Timer buttons to change the displayed time
 	$('#workTimeButton').click(() => { changeDisplayedTime('work') })
@@ -38,6 +43,7 @@ $(document).ready(() => {
 	$('#breakPlus').click(() => { incrementTimer('breakTime') })
 	$('#workMinus').click(() => { decrementTimer('workTime') })
 	$('#workPlus').click(() => { incrementTimer('workTime') })
+	$('#timer').click(() => { reinitializeTimer() })
 
 	// Use the Start and Stop buttons for the timer
 	let timer = null

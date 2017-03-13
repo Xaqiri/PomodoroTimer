@@ -1,23 +1,45 @@
-$bgcolor: #004;
-$fgcolor: #DDD;
+$red-50: #ffebee;
+$red-900: #b71c1c;
+$green-A400: #00e676;
+$green-A700: #00c853;
 
-html, body {
-	background: $bgcolor;
-	color: $fgcolor;
+@mixin user-select() {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+html {
+	margin: 2.5% 1%;
+	background: darken($red-900, 30%);
+	font-family: sans-serif;
+}
+
+body {
+	@include user-select();
+	background: $red-900;
+	color: $red-50;
 	text-align: center;
+	max-width: 400px;
+	margin: 2.5% auto;
+	padding: 5%;
+	box-shadow: 0 -15px $green-A700;
+	border-radius: 10%;
 }
 
 .button {
 	height: 100%;
 	padding: 4px 4px;
 	margin-bottom: 5%;
-  border: 2px solid lighten($bgcolor, 40%);
-	color: $fgcolor;
-  background-color: $bgcolor;
+  border: 2px solid lighten($red-900, 40%);
+	color: $red-50;
+  background-color: $red-900;
   &:hover {
-    background-color: lighten($bgcolor, 60%);
-    color: darken($fgcolor, 80%);
-    box-shadow: 0px 0px 10px lighten($bgcolor, 60%);
+		background-color: $red-50;
+    color: $red-900;
+    box-shadow: 0px 0px 10px $red-50;
 		cursor: pointer;
   }
 }
@@ -86,4 +108,11 @@ html, body {
 
 footer {
 	margin-top: 5%;
+	a {
+		text-decoration: none;
+		color: $green-A700;
+		&:hover {
+			color: $green-A400;
+		}
+	}
 }
