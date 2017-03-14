@@ -28,6 +28,7 @@ $(document).ready(() => {
 		stop()
 		$('#minutes').text($('#'+mode+'Time').text())
 		$('#seconds').text('00')
+		$('title').text($('#'+mode+'Time').text())
 	}
 	const reinitializeTimer = () => {
 		$('#workTime').text(defaultWork)
@@ -62,6 +63,7 @@ $(document).ready(() => {
 				seconds = seconds < 10 ? '0'+seconds : seconds
 				$('#seconds').text(seconds)
 				$('#minutes').text(minutes)
+				$('title').text(minutes + ': ' + seconds)
 				if ($('#minutes').text() == 0 && $('#seconds').text() == 0) {
 					stop()
 					document.getElementById(audio).play()
