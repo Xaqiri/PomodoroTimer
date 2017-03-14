@@ -13,9 +13,9 @@ body {
   color: #ffebee;
   text-align: center;
   max-width: 400px;
-  margin: 2.5% auto;
+  margin: 5% auto;
   padding: 5%;
-  box-shadow: 0 -15px #00c853;
+  box-shadow: 0 -25px #00c853;
   border-radius: 10%; }
 
 .button {

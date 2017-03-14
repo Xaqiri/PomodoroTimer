@@ -2,6 +2,7 @@ $(document).ready(() => {
 	let audio
 	const defaultBreak = 5
 	const defaultWork = 25
+
 	const changeAudio = (task, audio) => {
 		return task === 'work' ? 'takeABreakAudio' : 'backToWorkAudio'
 	}
@@ -72,4 +73,5 @@ $(document).ready(() => {
 			timer = null
 		}
 	})
+	$('#workTimeButton').click()
 })
