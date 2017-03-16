@@ -63,9 +63,10 @@ $(document).ready(() => {
 				seconds = seconds < 10 ? '0'+seconds : seconds
 				$('#seconds').text(seconds)
 				$('#minutes').text(minutes)
-				$('title').text(minutes + ': ' + seconds)
+				$('title').text(minutes + ':' + seconds)
 				if ($('#minutes').text() == 0 && $('#seconds').text() == 0) {
 					stop()
+					$('title').text('00:00')
 					document.getElementById(audio).play()
 				}
 			}, 1000)
